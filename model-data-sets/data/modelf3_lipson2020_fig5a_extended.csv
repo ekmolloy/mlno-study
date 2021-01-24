@@ -1,0 +1,16 @@
+Outgroup,A,B,f3
+BakaDG,FrenchDG,FrenchDG,69
+BakaDG,FrenchDG,HanDG,56
+BakaDG,FrenchDG,MixeDG1,58.64
+BakaDG,FrenchDG,MixeDG2,58.64
+BakaDG,FrenchDG,UlchiDG,56
+BakaDG,HanDG,HanDG,80
+BakaDG,HanDG,MixeDG1,71.96
+BakaDG,HanDG,MixeDG2,71.96
+BakaDG,HanDG,UlchiDG,77
+BakaDG,MixeDG1,MixeDG1,118.0624
+BakaDG,MixeDG1,MixeDG2,103.0624
+BakaDG,MixeDG1,UlchiDG,73.48
+BakaDG,MixeDG2,MixeDG2,108.0624
+BakaDG,MixeDG2,UlchiDG,73.48
+BakaDG,UlchiDG,UlchiDG,83
