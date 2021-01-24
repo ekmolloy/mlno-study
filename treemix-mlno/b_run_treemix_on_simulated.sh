@@ -42,11 +42,6 @@ INDIR="../simulated-data-sets/data"
 OUTDIR="data/simulated-data-sets/${TYPE}_${NAME}_${LOCI}"
 mkdir -p $OUTDIR
 
-OPTS="-seed 12345 -global -root $OUTG -m $NMIG"
-if [ $TYPE == "f2" ]; then
-    OPTS="-f2 $OPTS"
-fi
-
 for ORDER in `seq 1 $NORDER`; do
     echo "Working on order $ORDER..."
 
@@ -55,6 +50,8 @@ for ORDER in `seq 1 $NORDER`; do
     POPADDORDER="data/pop-add-orders/${NAME}_popaddorder_${ORDER}.txt"
 
     for MTHD in "treemix" "treemix-mlno"; do
+        BASE="${MTHD}_${TYPE}_${NAME}_${LOCI}_${ORDER}"
+
         # Run TreeMix
         OPTS="-seed 12345 -global -root $OUTG -m $NMIG"
         if [ $TYPE == "f2" ]; then
@@ -63,7 +60,7 @@ for ORDER in `seq 1 $NORDER`; do
         if [ $MTHD == "treemix-mlno" ]; then
             OPTS="$OPTS -mlno"
         fi
-        OUT="$OUTDIR/${MTHD}_${TYPE}_${NAME}_${LOCI}_${ORDER}"
+        OUT="$OUTDIR/$BASE"
         if [ ! -e $OUT.vertices.gz ] || [ ! -e $OUT.edges.gz ]; then
             $TREEMIX -i $IN \
                      -popaddorder $POPADDORDER \
@@ -75,13 +72,13 @@ for ORDER in `seq 1 $NORDER`; do
         fi
 
         # Compute triplet distance
-        KEEP="$OUTDIR/keep_${MTHD}_${TYPE}_${NAME}_${LOCI}_${ORDER}.csv"
+        KEEP="$OUTDIR/keep_${BASE}.csv"
         if [ ! -e $KEEP ]; then
             # Save log-likelihood
             LLIK=$(cat $OUT.llik | awk '{print $7}' | tr '\n' ' ' | sed 's/ /,/g')
 
             # Convert graph into the correct format for ntd
-            ESTIG="$OUTDIR/ntdgraph_${MTHD}_${TYPE}_${NAME}_${LOCI}_${ORDER}.txt"
+            ESTIG="$OUTDIR/ntdgraph_${BASE}.txt"
             python tools/treemix_to_ntd.py \
                     -v $OUT.vertices.gz \
                     -e $OUT.edges.gz \
