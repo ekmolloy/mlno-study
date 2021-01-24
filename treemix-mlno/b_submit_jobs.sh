@@ -3,7 +3,7 @@
 qsub -cwd \
      -V \
      -N "b" \
-     -l h_data=16G,time=04:00:00 \
+     -l h_data=16G,time=05:00:00 \
      -t 1-72 \
      -m a \
      -M ekmolloy \

@@ -14,7 +14,7 @@ if [ ! -e simulated-parameters.txt ]; then
     for TYPE in "cov" "f2"; do
         for NAME in ${NAMES[@]}; do
             for LOCI in ${NLOCI[@]}; do
-                echo "$TYPE $NAME $LOCI $MTHD" >> simulated-parameters.txt
+                echo "$TYPE $NAME $LOCI" >> simulated-parameters.txt
             done
         done
     done

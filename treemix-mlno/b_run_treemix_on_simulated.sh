@@ -31,7 +31,7 @@ elif [ $NAME == "lipson2020_fig5a" ]; then
     OUTG="BakaDG"
     NMIG=1
 elif [ $NAME == "lipson2020_fig5a_extended" ]; then
-    NORDER=120
+    NORDER=720
     OUTG="BakaDG"
     NMIG=1
 fi
@@ -77,6 +77,9 @@ for ORDER in `seq 1 $NORDER`; do
         # Compute triplet distance
         KEEP="$OUTDIR/keep_${MTHD}_${TYPE}_${NAME}_${LOCI}_${ORDER}.csv"
         if [ ! -e $KEEP ]; then
+            # Save log-likelihood
+            LLIK=$(cat $OUT.llik | awk '{print $7}' | tr '\n' ' ' | sed 's/ /,/g')
+
             # Convert graph into the correct format for ntd
             ESTIG="$OUTDIR/ntdgraph_${MTHD}_${TYPE}_${NAME}_${LOCI}_${ORDER}.txt"
             python tools/treemix_to_ntd.py \
@@ -87,12 +90,11 @@ for ORDER in `seq 1 $NORDER`; do
 
             # Run ntd
             if [ -e $TRUEG ] && [ -e $ESTIG ]; then
-                DIST1=$($NTD1 $TRUEG $ESTIG | awk '{print $1}')
-	        DIST2=$($NTD2 $TRUEG $ESTIG | awk '{print $1}')
-                echo "$TYPE,$NAME,$LOCI,$MTHD,$ORDER,$DIST1,$DIST2" > $KEEP
+                DIST=$($NTD1 $TRUEG $ESTIG | awk '{print $1}')
+                echo "$TYPE,$NAME,$LOCI,$MTHD,$ORDER,${LLIK}${DIST}" > $KEEP
                 rm $ESTIG
             else
-                echo "$TYPE,$NAME,$LOCI,$MTHD,$ORDER,NA,NA" > $KEEP
+                echo "$TYPE,$NAME,$LOCI,$MTHD,$ORDER,${LLIK}NA" > $KEEP
             fi
         fi
     done
