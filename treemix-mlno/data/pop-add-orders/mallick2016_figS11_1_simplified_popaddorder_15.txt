@@ -1,10 +1,10 @@
 Chimp
-Australian
 Dinka
 Papuan
-Dai
-Kostenki14
 Denisovan
-Ami
+Australian
+Kostenki14
 Onge
+Ami
+Dai
 Altai

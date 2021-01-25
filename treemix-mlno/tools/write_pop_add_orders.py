@@ -19,10 +19,12 @@ def main(args):
     #wu2020_fig7a 3628800
     #yan2020_fig2 720
 
-    if n > 1000:
-        rinds = numpy.random.randint(0, high=n, size=1000)
-    else:
-        rinds = [i for i in range(0, n)]
+    #if n > 1000:
+    #    rinds = numpy.random.randint(0, high=n, size=1000)
+    #else:
+    #    rinds = [i for i in range(0, n)]
+
+    rinds = numpy.random.randint(0, high=n, size=100)
 
     for i, r in enumerate(rinds):
         order = orders[r]

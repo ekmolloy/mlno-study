@@ -1,10 +1,10 @@
-Ami
-Chimp
-Denisovan
-Australian
-Dai
-Papuan
-Onge
 Dinka
+Denisovan
 Altai
+Chimp
+Papuan
+Ami
+Onge
+Australian
 Kostenki14
+Dai

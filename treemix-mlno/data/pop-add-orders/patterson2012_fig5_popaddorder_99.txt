@@ -1,5 +1,5 @@
-X
-Out
-B
 A
 C
+B
+Out
+X
