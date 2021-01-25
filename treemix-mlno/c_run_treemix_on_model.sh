@@ -58,6 +58,8 @@ elif [ $NAME == "yan2020_fig2" ]; then
     NMIG=1
 fi
 
+NORDER=100
+
 TRUEG="../model-data-sets/data/ntdgraph_${NAME}.txt"
 TRUEM="../model-data-sets/data/ntdmap_${NAME}.txt"
 IN="../model-data-sets/data/modelf2mat_${NAME}.txt"
