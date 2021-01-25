@@ -1,6 +1,6 @@
 Altai
-Mbuti
-ANE
-Dai
 Onge
 Karitiana
+ANE
+Mbuti
+Dai

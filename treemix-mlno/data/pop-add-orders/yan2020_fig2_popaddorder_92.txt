@@ -1,6 +1,6 @@
-Altai
 Mbuti
-Onge
-ANE
-Karitiana
 Dai
+ANE
+Altai
+Karitiana
+Onge

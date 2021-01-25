@@ -1,6 +1,6 @@
+UlchiDG
+FrenchDG
 BakaDG
 HanDG
-FrenchDG
-MixeDG2
 MixeDG1
-UlchiDG
+MixeDG2

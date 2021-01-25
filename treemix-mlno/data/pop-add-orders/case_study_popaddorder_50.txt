@@ -1,5 +1,5 @@
-popC
-popA
 popB
 popE
 popD
+popA
+popC

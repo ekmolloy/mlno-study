@@ -1,10 +1,10 @@
-Altai
-Dai
-Dinka
-Denisovan
 Ami
 Australian
 Kostenki14
-Papuan
 Onge
+Dai
+Altai
+Denisovan
+Dinka
 Chimp
+Papuan
