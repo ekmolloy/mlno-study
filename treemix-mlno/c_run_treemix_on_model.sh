@@ -22,6 +22,15 @@ NAMES=( "mallick2016_figS11_1_simplified" \
         "wu2020_fig7a" \
         "yan2020_fig2"  )
 
+NAMES=( "case_study" \
+        "lipson2020_fig5a_extended" \
+        "lipson2020_fig5a" \
+        "patterson2012_fig5" \
+        "yan2020_fig2"  )
+
+
+NAMES=( "haak2015_figS8-1" )
+
 for NAME in ${NAMES[@]}; do
 
 if [ $NAME == "case_study" ]; then
@@ -67,26 +76,34 @@ SE="../model-data-sets/data/modelf2se_${NAME}.txt"
 OUTDIR="data/model-data-sets/${NAME}"
 mkdir -p $OUTDIR
 
-for ORDER in `seq 1 $NORDER`; do
+#for ORDER in `seq 1 $NORDER`; do
+SEEDS=("12345" "123456789" "6789" "92384")
+for ORDER in ${SEEDS[@]}; do
     echo "Working on order $ORDER..."
 
     POPADDORDER="data/pop-add-orders/${NAME}_popaddorder_${ORDER}.txt"
 
-    for MTHD in "treemix" "treemix-mlno"; do
+    for MTHD in "treemix-allmigs" "treemix-allmigs-mlno"; do
         BASE="${MTHD}_${NAME}_${ORDER}"
 
         # Run TreeMix
-        OPTS="-f2 -seed 12345 -global -root $OUTG -m $NMIG"
+        OPTS="-allmigs -f2 -seed 12345 -global -root $OUTG -m $NMIG"
+        OPTS="-allmigs -f2 -seed $ORDER -global -root $OUTG -m $NMIG"
         if [ $MTHD == "treemix-mlno" ]; then
             OPTS="$OPTS -mlno"
         fi
         OUT="$OUTDIR/$BASE"
         if [ ! -e $OUT.vertices.gz ] || [ ! -e $OUT.edges.gz ]; then
-            $GNUTIME -v $TREEMIX -i $IN \
-                     -popaddorder $POPADDORDER \
+            #$GNUTIME -v $TREEMIX -i $IN \
+            #         -popaddorder $POPADDORDER \
+            #         -givenmat $SE \
+            #         -o $OUT \
+            #         $OPTS |& tee $OUT.log
+	    $GNUTIME -v $TREEMIX -i $IN \
                      -givenmat $SE \
                      -o $OUT \
                      $OPTS |& tee $OUT.log
+	   
 	    rm ${OUT}.cov.gz
 	    rm ${OUT}.covse.gz 
         fi
