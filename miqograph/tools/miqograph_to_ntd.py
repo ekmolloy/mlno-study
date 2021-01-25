@@ -69,6 +69,8 @@ def main(args):
         except KeyError:
             pass
 
+    #print(tree.as_string(schema='newick'))
+
     # Remove leaves without labels
     postorder = [n for n in tree.postorder_node_iter()]
     for node in postorder:
