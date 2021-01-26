@@ -65,7 +65,6 @@ NORDER=100
 TRUEG="../model-data-sets/data/ntdgraph_${NAME}.txt"
 TRUEM="../model-data-sets/data/ntdmap_${NAME}.txt"
 IN="../model-data-sets/data/modelf2mat_${NAME}.txt"
-SE="../model-data-sets/data/modelf2se_${NAME}.txt"
 OUTDIR="data/model-data-sets/${NAME}"
 mkdir -p $OUTDIR
 
@@ -77,21 +76,19 @@ for ORDER in `seq 1 $NORDER`; do
     for MTHD in "treemix" "treemix-mlno" "treemix-allmigs" "treemix-allmigs-mlno"; do
         BASE="${MTHD}_${NAME}_${ORDER}"
 
-        # Run TreeMix
-        OPTS="-f2 -seed $ORDER -global -root $OUTG -m $NMIG"
+        # Set-up TreeMix options
+        OPTS="-seed 12345 -f2 -givenmat -popaddorder $POPADDORDER -root $OUTG -global -m $NMIG"
         if [ ! -z $(echo $MTHD | grep "mlno") ]; then
             OPTS="$OPTS -mlno"
         fi
         if [ ! -z $(echo $MTHD | grep "allmigs") ]; then
             OPTS="$OPTS -allmigs"
         fi
+
+        # Run TreeMix
         OUT="$OUTDIR/$BASE"
         if [ ! -e $OUT.vertices.gz ] || [ ! -e $OUT.edges.gz ]; then
-            $GNUTIME -v $TREEMIX -i $IN \
-                     -popaddorder $POPADDORDER \
-                     -givenmat $SE \
-                     -o $OUT \
-                     $OPTS |& tee $OUT.log
+            $GNUTIME -v $TREEMIX -i $IN -o $OUT $OPTS |& tee $OUT.log
         fi
 
         # Compute triplet distance
